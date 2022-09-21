@@ -39,7 +39,9 @@
 
 % There are 10 badges per page, so we can compute the margins.
 \pgfmathsetlengthmacro{\BadgeMarginTop}{(\paperheight - 5 * \BadgeHeight - 4 * \BadgeSepY) / 2}
+\pgfmathsetlengthmacro{\BadgeMarginTop}{12mm}
 \pgfmathsetlengthmacro{\BadgeMarginLeft}{(\paperwidth - 2 * \BadgeWidth - \BadgeSepX) / 2}
+\pgfmathsetlengthmacro{\BadgeMarginLeft}{15mm}
 \pgfmathsetlengthmacro{\LogoHeight}{\BadgeHeight * 0.25}
 
 % No overprinting in draft mode.
