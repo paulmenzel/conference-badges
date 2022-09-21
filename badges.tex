@@ -26,10 +26,10 @@
 \newcommand{\BadgeSepY}{0.0cm}
 
 % The amount of overprinting (irrelevant for draft mode)
-\newcommand{\Fudge}{1.5mm}
+\newcommand{\Fudge}{0.0mm}
 
 % Shortening of the crop marks (may be negative)
-\newcommand{\CropMarksSep}{0.5mm}
+\newcommand{\CropMarksSep}{0.0mm}
 
 % The colors for the events markers
 \colorlet{eventA}{blue}
@@ -225,11 +225,11 @@
     \end{tikzpicture}
 
     \ifnum\onthispagesofar=\BadgesPerPage
-      \CropMarks
+      %\CropMarks
     \fi
 
     \pgfmathtruncatemacro{\i}{\i+1}
     \pgfmathtruncatemacro{\onthispagesofar}{mod(\onthispagesofar, \BadgesPerPage) + 1}
   }%
-  \CropMarks
+  %\CropMarks
 \end{document}
