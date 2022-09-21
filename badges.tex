@@ -9,7 +9,7 @@
 % Comment out the following line for the final print.  Disabling draft
 % mode enables overprinting to avoid white margins after cropping the
 % badges and it also hides the black frame around each badge.
-%\DraftModetrue
+\DraftModetrue
 
 % Uncomment the following line to enable output suitable for the
 % second side of 2-sided printing.
@@ -32,10 +32,9 @@
 \newcommand{\CropMarksSep}{0.0mm}
 
 % The colors for the events markers
-\colorlet{eventA}{blue}
-\colorlet{eventB}{green!60!black}
-\definecolor{eventC}{RGB}{255,100,0}
-\colorlet{eventD}{purple}
+\definecolor{mpg}{RGB}{0,85,85}
+\definecolor{hgf}{RGB}{0,100,160}
+\definecolor{sonstige}{RGB}{255,100,0}
 
 % There are 10 badges per page, so we can compute the margins.
 \pgfmathsetlengthmacro{\BadgeMarginTop}{(\paperheight - 5 * \BadgeHeight - 4 * \BadgeSepY) / 2}
@@ -51,17 +50,16 @@
 
 % If the number or names of the optional events change, you need to
 % adapt the following command.
-\newcommand{\attendance}[5]{
+\newcommand{\affiliation}[5]{
   \pgfmathsetlengthmacro{\xshift}{#1 * \BadgeWidth / 4}
   \begin{scope}[xshift=\xshift]
     \draw [fill=#2!20,draw=none] (#4, -\Fudge) rectangle (\BadgeWidth / 4 + #5, 0.5);
     \node [anchor=base] at (\BadgeWidth / 8,0.12) {\textbf{\large{#3}}};
   \end{scope}
 }
-\newcommand{\attendsEventA}{\attendance{0}{eventA}{Tue}{-\Fudge}{0}}
-\newcommand{\attendsEventB}{\attendance{1}{eventB}{Wed}{0}{0}}
-\newcommand{\attendsEventC}{\attendance{2}{eventC}{Thu}{0}{0}}
-\newcommand{\attendsEventD}{\attendance{3}{eventD}{Speaker}{0}{\Fudge}}
+\newcommand{\frommpg}{\affiliation{0}{mpg}{MPG}{-\Fudge}{0}}
+\newcommand{\fromhgf}{\affiliation{1}{hgf}{HGF}{0}{0}}
+\newcommand{\fromsonstige}{\affiliation{2}{sonstige}{Gast}{0}{0}}
 
 \newcommand{\TryNameSize}[2]{
   \begin{scope}
@@ -93,12 +91,15 @@
     % is the place.
 
     %% The headline
-    %\draw [fill=black!5,draw=none]
-     % (-\Fudge, \BadgeHeight - 0.9cm) rectangle (\BadgeWidth + \Fudge, \BadgeHeight + \Fudge);
+    \node at (\BadgeWidth / 2, \BadgeHeight - 0.6 * \LogoHeight){\includegraphics[width=8cm]{it4science-days.png}};
+    %\node at (1, \BadgeHeight - \LogoHeight) {};
+    %\node at (\BadgeWidth - \BadgeWidth / 4, \BadgeHeight - \LogoHeight) {\includegraphics[height=\LogoHeight]{uom}};
 
-    \node at (\BadgeWidth / 4, \BadgeHeight - \LogoHeight){\includegraphics[height=\LogoHeight]{logo_large.png}};
-    \node at (1, \BadgeHeight - \LogoHeight) {};
-    \node at (\BadgeWidth - \BadgeWidth / 4, \BadgeHeight - \LogoHeight) {\includegraphics[height=\LogoHeight]{uom}};
+    \ifthenelse{\equal{\mpg}{}}{}{\colorlet{StripeColor}{mpg}}
+    \ifthenelse{\equal{\hgf}{}}{}{\colorlet{StripeColor}{hgf}}
+    \ifthenelse{\equal{\sonstige}{}}{}{\colorlet{StripeColor}{sonstige}}
+    \draw [fill=StripeColor,draw=none]
+     (-\Fudge, \BadgeHeight - 1.6 * \LogoHeight) rectangle (\BadgeWidth + \Fudge, \BadgeHeight - 1.1 * \LogoHeight + \Fudge);
 
     %% The middle part
     % Try different font sizes for the name to find the maximum
@@ -127,14 +128,18 @@
     }}}}}}}}}}}}}}}}}}}
     
 
-    \node [anchor=base] at (\BadgeWidth / 2, 1.2) {\Large{\mpg}};
+    \node [anchor=base] at (\BadgeWidth / 2, 1.2) {
+        \ifthenelse{\equal{\mpg}{}}{}{\Large{\mpg}}
+        \ifthenelse{\equal{\hgf}{}}{}{\Large{\hgf}}
+        \ifthenelse{\equal{\sonstige}{}}{}{\Large{\sonstige}}
+    };
 
     %% The bottom line
-    \ifthenelse{\equal{\mpg}{}}{}{\attendsEventA}
-    \ifthenelse{\equal{\hgf}{}}{}{\attendsEventB}
-    \ifthenelse{\equal{\sonstige}{}}{}{\attendsEventC}
+    %\ifthenelse{\equal{\mpg}{}}{}{\frommpg}
+    %\ifthenelse{\equal{\hgf}{}}{}{\fromhgf}
+    %\ifthenelse{\equal{\sonstige}{}}{}{\fromsonstige}
     % Draw a fine gray line above the event markers.
-    \draw [draw=black!30] (-\Fudge, 0.5) -- (\BadgeWidth + \Fudge, 0.5);
+    %\draw [draw=black!30] (-\Fudge, 0.5) -- (\BadgeWidth + \Fudge, 0.5);
 
     %% A frame
     % Draw a frame around the badge if in draft mode.
