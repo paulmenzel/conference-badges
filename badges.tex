@@ -167,7 +167,7 @@
 }
 \pgfmathsetlengthmacro{\HorizontalMarkLength}{\BadgeMarginLeft - \CropMarksSep}
 \newcommand{\HorizontalMarks}{
-  \foreach \i in {0,...,3} {
+  \foreach \i in {0,...,4} {
     \pgfmathsetmacro{\step}{\i * \BadgeHeight + \i * \BadgeSepY}
     % left
     \draw ($ (current page.north west) + (0, -\BadgeMarginTop - \step) $)
@@ -200,7 +200,7 @@
   \end{tikzpicture}
 }
 
-\newcommand{\BadgesPerPage}{8}
+\newcommand{\BadgesPerPage}{10}
 
 \pagestyle{empty}
 \begin{document}
