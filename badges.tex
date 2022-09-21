@@ -17,13 +17,13 @@
 
 % You may change the following two values (within reason).  Everything
 % else will be recomputed automatically.
-\newcommand{\BadgeWidth}{8.6cm}
-\newcommand{\BadgeHeight}{5.5cm}
+\newcommand{\BadgeWidth}{9.0cm}
+\newcommand{\BadgeHeight}{5.4cm}
 
 
 % Distance between badges.  You probably do not need to change this.
-\newcommand{\BadgeSepX}{0.6cm}
-\newcommand{\BadgeSepY}{0.9cm}
+\newcommand{\BadgeSepX}{0.0cm}
+\newcommand{\BadgeSepY}{0.0cm}
 
 % The amount of overprinting (irrelevant for draft mode)
 \newcommand{\Fudge}{1.5mm}
@@ -37,8 +37,8 @@
 \definecolor{eventC}{RGB}{255,100,0}
 \colorlet{eventD}{purple}
 
-% There are 8 badges per page, so we can compute the margins.
-\pgfmathsetlengthmacro{\BadgeMarginTop}{(\paperheight - 4 * \BadgeHeight - 3 * \BadgeSepY) / 2}
+% There are 10 badges per page, so we can compute the margins.
+\pgfmathsetlengthmacro{\BadgeMarginTop}{(\paperheight - 5 * \BadgeHeight - 4 * \BadgeSepY) / 2}
 \pgfmathsetlengthmacro{\BadgeMarginLeft}{(\paperwidth - 2 * \BadgeWidth - \BadgeSepX) / 2}
 \pgfmathsetlengthmacro{\LogoHeight}{\BadgeHeight * 0.25}
 
@@ -64,7 +64,7 @@
 \newcommand{\TryNameSize}[2]{
   \begin{scope}
     \node [anchor=mid] (try#1) at (\BadgeWidth / 2, 3.2)
-      {\textbf{\fontsize{#1}{#1}\selectfont{\phantom{\firstname~\lastname}}}};
+      {\textbf{\fontsize{#1}{#1}\selectfont{\phantom{\name}}}};
     \newdimen\x
     \pgfextractx{\x}{\pgfpointanchor{try#1}{east}}
     \pgfmathtruncatemacro{\TooLarge}{\x > \BadgeWidth - 0.2cm}
@@ -72,7 +72,7 @@
       #2
     \else
       \node [anchor=mid] at (\BadgeWidth / 2, 3.2)
-        {\textbf{\fontsize{#1}{#1}\selectfont\firstname~\lastname}};
+        {\textbf{\fontsize{#1}{#1}\selectfont\name}};
     \fi
   \end{scope}
 }
@@ -103,16 +103,16 @@
     % size that fits.
     
       \node [anchor=mid] at (\BadgeWidth / 2, \BadgeHeight / 2)
-        {\textbf{\fontsize{22}{22}\selectfont{\firstname~\lastname}}};
+        {\textbf{\fontsize{22}{22}\selectfont{\name}}};
   
 
-    \node [anchor=base] at (\BadgeWidth / 2, 1.8) {\Large{\affiliation}};
+    \node [anchor=base] at (\BadgeWidth / 2, 1.8) {\Large{\mpg}};
 
     %% The bottom line
-    \ifthenelse{\equal{\eventA}{}}{}{\attendsEventA}
-    \ifthenelse{\equal{\eventB}{}}{}{\attendsEventB}
-    \ifthenelse{\equal{\eventC}{}}{}{\attendsEventC}
-    \ifthenelse{\equal{\eventD}{}}{}{\attendsEventD}
+    \ifthenelse{\equal{\mpg}{}}{}{\attendsEventA}
+    \ifthenelse{\equal{\mpg}{}}{}{\attendsEventB}
+    \ifthenelse{\equal{\mpg}{}}{}{\attendsEventC}
+    \ifthenelse{\equal{\mpg}{}}{}{\attendsEventD}
     % Draw a fine gray line above the event markers.
     \draw [draw=black!30] (-\Fudge, 0.5) -- (\BadgeWidth + \Fudge, 0.5);
 
@@ -191,7 +191,7 @@
   \begin{tikzpicture}[remember picture,overlay,
     every path/.style={
         color=black,
-        line width=0.01pt
+        line width=0.0pt
     }]
     \VerticalMarks
     \HorizontalMarks
@@ -207,10 +207,10 @@
   % The number of badges already printed on this page plus 1.
   \def\onthispagesofar{1}
   \csvreader{participants.csv}{%
-    1=\affiliation,4=\firstname,5=\lastname,
-    6=\eventA,7=\eventB,8=\eventC,9=\eventD}%
+    2=\name,4=\mpg,5=\hgf,
+    6=\sonstige}%
   {
-    \pgfmathtruncatemacro{\j}{mod(\i, 8)}
+    \pgfmathtruncatemacro{\j}{mod(\i, 10)}
 
     \ifnum\j=0\ifnum\i=0\else
       \newpage
