@@ -65,7 +65,7 @@
 
 \newcommand{\TryNameSize}[2]{
   \begin{scope}
-    \node [anchor=mid] (try#1) at (\BadgeWidth / 2, 3.2)
+    \node [anchor=mid] (try#1) at (\BadgeWidth / 2, 2.2)
       {\textbf{\fontsize{#1}{#1}\selectfont{\phantom{\name}}}};
     \newdimen\x
     \pgfextractx{\x}{\pgfpointanchor{try#1}{east}}
@@ -73,7 +73,7 @@
     \ifnum \TooLarge=1
       #2
     \else
-      \node [anchor=mid] at (\BadgeWidth / 2, 3.2)
+      \node [anchor=mid] at (\BadgeWidth / 2, 2.2)
         {\textbf{\fontsize{#1}{#1}\selectfont\name}};
     \fi
   \end{scope}
@@ -103,18 +103,36 @@
     %% The middle part
     % Try different font sizes for the name to find the maximum
     % size that fits.
+    \TryNameSize{36}{
+    \TryNameSize{34}{
+    \TryNameSize{32}{
+    \TryNameSize{31}{
+    \TryNameSize{30}{
+    \TryNameSize{29}{
+    \TryNameSize{28}{
+    \TryNameSize{27}{
+    \TryNameSize{26}{
+    \TryNameSize{25}{
+    \TryNameSize{24}{
+    \TryNameSize{23}{
+    \TryNameSize{22}{
+    \TryNameSize{21}{
+    \TryNameSize{20}{
+    \TryNameSize{19}{
+    \TryNameSize{18}{
+    \TryNameSize{17}{
+    \TryNameSize{16}{
+      \node [anchor=mid] at (\BadgeWidth / 2, 2.2)
+        {\textbf{\fontsize{15}{15}\selectfont{\name}}};
+    }}}}}}}}}}}}}}}}}}}
     
-      \node [anchor=mid] at (\BadgeWidth / 2, \BadgeHeight / 2)
-        {\textbf{\fontsize{22}{22}\selectfont{\name}}};
-  
 
-    \node [anchor=base] at (\BadgeWidth / 2, 1.8) {\Large{\mpg}};
+    \node [anchor=base] at (\BadgeWidth / 2, 1.2) {\Large{\mpg}};
 
     %% The bottom line
     \ifthenelse{\equal{\mpg}{}}{}{\attendsEventA}
-    \ifthenelse{\equal{\mpg}{}}{}{\attendsEventB}
-    \ifthenelse{\equal{\mpg}{}}{}{\attendsEventC}
-    \ifthenelse{\equal{\mpg}{}}{}{\attendsEventD}
+    \ifthenelse{\equal{\hgf}{}}{}{\attendsEventB}
+    \ifthenelse{\equal{\sonstige}{}}{}{\attendsEventC}
     % Draw a fine gray line above the event markers.
     \draw [draw=black!30] (-\Fudge, 0.5) -- (\BadgeWidth + \Fudge, 0.5);
 
