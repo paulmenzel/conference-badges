@@ -1,7 +1,7 @@
 \documentclass{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{anyfontsize,csvsimple,xifthen,tikz,xcolor,xstring}
+\usepackage{anyfontsize,csvsimple,ifthen,tikz,xcolor}
 \usetikzlibrary{calc}
 \newif\ifDraftMode\DraftModefalse
 \newif\ifMirroredPage\MirroredPagefalse
@@ -95,7 +95,7 @@
     %\node at (1, \BadgeHeight - \LogoHeight) {};
     %\node at (\BadgeWidth - \BadgeWidth / 4, \BadgeHeight - \LogoHeight) {\includegraphics[height=\LogoHeight]{uom}};
 
-    \ifthenelse{\cnttest{\StrLen{\mpg}}{>}{0}}{\colorlet{StripeColor}{mpg}}{}
+    \ifthenelse{\equal{\mpg}{}}{}{\colorlet{StripeColor}{mpg}}
     \ifthenelse{\equal{\hgf}{}}{}{\colorlet{StripeColor}{hgf}}
     \ifthenelse{\equal{\sonstige}{}}{}{\colorlet{StripeColor}{sonstige}}
     \draw [fill=StripeColor,draw=none]
