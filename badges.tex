@@ -96,7 +96,6 @@
     %\node at (\BadgeWidth - \BadgeWidth / 4, \BadgeHeight - \LogoHeight) {\includegraphics[height=\LogoHeight]{uom}};
 
     \ifthenelse{\equal{\mpg}{}}{}{\colorlet{StripeColor}{mpg}}
-    \ifthenelse{\equal{\hgf}{}}{}{\colorlet{StripeColor}{hgf}}
     \ifthenelse{\equal{\sonstige}{}}{}{\colorlet{StripeColor}{sonstige}}
     \draw [fill=StripeColor,draw=none]
      (-\Fudge, \BadgeHeight - 1.6 * \LogoHeight) rectangle (\BadgeWidth + \Fudge, \BadgeHeight - 1.1 * \LogoHeight + \Fudge);
@@ -130,13 +129,11 @@
 
     \node [anchor=base] at (\BadgeWidth / 2, 1.2) {
         \ifthenelse{\equal{\mpg}{}}{}{\Large{\mpg}}
-        \ifthenelse{\equal{\hgf}{}}{}{\Large{\hgf}}
         \ifthenelse{\equal{\sonstige}{}}{}{\Large{\sonstige}}
     };
 
     %% The bottom line
     %\ifthenelse{\equal{\mpg}{}}{}{\frommpg}
-    %\ifthenelse{\equal{\hgf}{}}{}{\fromhgf}
     %\ifthenelse{\equal{\sonstige}{}}{}{\fromsonstige}
     % Draw a fine gray line above the event markers.
     %\draw [draw=black!30] (-\Fudge, 0.5) -- (\BadgeWidth + \Fudge, 0.5);
@@ -232,8 +229,8 @@
   % The number of badges already printed on this page plus 1.
   \def\onthispagesofar{1}
   \csvreader{participants.csv}{%
-    2=\name,4=\mpg,5=\hgf,
-    6=\sonstige}%
+    2=\name,7=\mpg,
+    8=\sonstige}%
   {
     \pgfmathtruncatemacro{\j}{mod(\i, 10)}
 
